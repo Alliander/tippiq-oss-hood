@@ -1,0 +1,114 @@
+is: [secured]
+securedBy: [JWT]
+description: |
+  Update a specific card.
+
+  When updating an existing card, you should be the original creator of the card (i.e. you can only update your own cards).
+  If you specify more information than required, invalid properties will be dropped.
+  Be advised to update cards only if their data actually has changed **for the end user**.
+  A system process which updates the last modified field is often not an actual change for the end user.
+  Updating cards that have not changed may cause them to appear changed to end users.
+  If they don't see actual change, they might consider your service spammy and disable it.
+
+  There are two strategies to update cards:
+
+  1. When inserting, the `id` of the card is returned. If this `id` is stored by the user, it can be used to update the card later using the `PUT /api/cards/{id}` endpoint.
+
+  2. Using the feature that `POST /api/cards` is idempotent with regard to the externalId used. When an updated version of the same card is posted with the same externalId (free to choose by the user), the existing card with that externalId is updated (instead of creating a new copy).
+body:
+  example: |
+    {
+      "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+      "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+      "title": "Title of the card",
+      "description": "Description of the card",
+      "images": {
+        "portrait": "https://images.example.com/portrait.png",
+        "landscape": "https://images.example.com/landscape.png",
+        "wide": "https://images.example.com/wide.png"
+      },
+      "startDate": "2015-08-03T09:42:14.000Z",
+      "endDate": "2015-08-04T11:47:25.000Z",
+      "publishedAt": "2015-08-03T09:42:14.000Z",
+      "expiresAt": "2015-08-08T11:47:25.000Z",
+      "authorId": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+      "publisherId": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+      "locations": [],
+      "tags": ["New tagname"],
+      "documentType": null,
+      "document": null,
+      "serviceId": "00000000-0000-0000-0000-000000000000"
+    }
+responses:
+  200:
+    body:
+      example: |
+        {
+          "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a",
+          "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+          "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+          "title": "Title of the card",
+          "description": "Description of the card",
+          "landscapeImage": null,
+          "portraitImage": null,
+          "wideImage": null,
+          "startDate": "2015-08-03T09:42:14.000Z",
+          "endDate": "2015-08-04T11:47:25.000Z",
+          "publishedAt": "2015-08-03T09:42:14.000Z",
+          "expiresAt": "2015-08-08T11:47:25.000Z",
+          "author": null,
+          "locations": [
+            {
+              "id": "b1f4025c-5609-11e5-858a-07060ee6e8ab",
+              "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  4.9164,
+                  52.33788
+                ]
+              },
+              "name": "Spaklerweg 20, Amsterdam"
+            }
+          ],
+          "publisher": {
+            "id": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+            "name": "Publishing Organization",
+            "bio": "Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo.",
+            "phone": "+31 20 1234567",
+            "email": "info@example.com",
+            "images": {
+              "card": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/blank.png",
+              "detail": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/liander_elec-small.png"
+            },
+            "hideLocation": false,
+            "location": {
+              "id": "b1f4025c-5609-11e5-858a-07060ee6e8ab",
+              "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  4.9164,
+                  52.33788
+                ]
+              },
+              "name": "Spaklerweg 20, Amsterdam"
+            }
+          },
+          "documentType": null,
+          "document": null,
+          "tags": [{
+            "id": "<tag-id>"
+            "label": "New tagname"
+          }],
+          "images": {
+            "portrait": "https://images.example.com/portrait.png",
+            "landscape": "https://images.example.com/landscape.png",
+            "wide": "https://images.example.com/wide.png"
+          },
+          "service": {
+            "name": "",
+            "category": "Wegwerkzaamheden",
+            "organizationId": "54e0be2e-560a-11e5-9f4d-039a76ea6f5c"
+          }
+        }
+  404: !include ../../../status-codes/404.raml
+  500: !include ../../../status-codes/500.raml

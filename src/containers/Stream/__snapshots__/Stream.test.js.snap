@@ -1,0 +1,188 @@
+exports[`test Renders 1`] = `
+<div
+  id="page-stream">
+  <div />
+  <div
+    className="container">
+    <div
+      className="row">
+      <div
+        className="col-sm-12">
+        <div
+          className="visible-xs">
+          <div
+            className="btn-group">
+            <button
+              className="btn btn-default"
+              disabled={false}
+              onClick={[Function]}
+              type="button">
+              Filteren
+            </button>
+            <div />
+          </div>
+        </div>
+        <div
+          className="pull-right hidden-xs undefined">
+          <div />
+        </div>
+        <h1
+          className={undefined}>
+          Dit gebeurt er in je buurt
+        </h1>
+      </div>
+    </div>
+    <div
+      className="row">
+      <div
+        className="hidden-xs undefined col-sm-3">
+        <div />
+        <div />
+      </div>
+      <div
+        className="col-sm-9">
+        <div
+          className={undefined}>
+          Er zijn geen kaartjes gevonden in jouw buurt met de geselecteerde zoekcritera.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="container-fluid footer undefined">
+    <div
+      className="hidden-xs">
+      <a
+        className={undefined}
+        onClick={[Function]}
+        style={Object {}}>
+        Over Tippiq Buurt
+      </a>
+      <a
+        className={undefined}
+        onClick={[Function]}
+        style={Object {}}>
+        Partners
+      </a>
+      <a
+        className={undefined}
+        onClick={[Function]}
+        style={Object {}}>
+        Privacy & Disclaimer
+      </a>
+      <a
+        className={undefined}
+        onClick={[Function]}
+        style={Object {}}>
+        Contact
+      </a>
+    </div>
+    <div
+      className={undefined}>
+      <a
+        className={undefined}
+        href="https://www.facebook.com/Tippiq-1430219107214646">
+        <i
+          className="fa fa-facebook" />
+      </a>
+      <a
+        className={undefined}
+        href="https://twitter.com/tippiq">
+        <i
+          className="fa fa-twitter" />
+      </a>
+    </div>
+    <div
+      className={undefined}>
+      Copyright © 2017 Alliander N.V.
+    </div>
+    <nav
+      className="visible-xs undefined navbar navbar-default">
+      <div
+        className="container">
+        <div
+          className="nav navbar-nav">
+          <li
+            className="visible-xs dropdown">
+            <a
+              aria-expanded={false}
+              aria-haspopup={true}
+              className="dropdown-toggle"
+              href="#"
+              id="footer"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button">
+              Meer over Tippiq
+               
+              <span
+                className="caret" />
+            </a>
+            <ul
+              aria-labelledby="footer"
+              className="dropdown-menu"
+              role="menu">
+              <li
+                className=""
+                role="presentation"
+                style={undefined}>
+                <a
+                  action="push"
+                  href="#"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="menuitem"
+                  tabIndex="-1">
+                  Over Tippiq Buurt
+                </a>
+              </li>
+              <li
+                className=""
+                role="presentation"
+                style={undefined}>
+                <a
+                  action="push"
+                  href="#"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="menuitem"
+                  tabIndex="-1">
+                  Partners
+                </a>
+              </li>
+              <li
+                className=""
+                role="presentation"
+                style={undefined}>
+                <a
+                  action="push"
+                  href="#"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="menuitem"
+                  tabIndex="-1">
+                  Privacy & Disclaimer
+                </a>
+              </li>
+              <li
+                className=""
+                role="presentation"
+                style={undefined}>
+                <a
+                  action="push"
+                  href="#"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="menuitem"
+                  tabIndex="-1">
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </li>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+`;

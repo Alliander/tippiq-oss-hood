@@ -1,0 +1,204 @@
+description: |
+  Add a new card. The id of the inserted card is returned.
+
+  **Card properties and property requirements:**
+
+  - `externalId` - An identifier used by the user to uniquely identify (the item on) the card. Can be used to apply updates to the same item based on a user chosen identifier.
+    - Should be at least 1 and at most 255 characters long
+    - *The `POST /api/cards` endpoint is idempotent with regard to the externalId.*
+  - `title` - The title of the card
+    - Should be at least 1 and at most 500 characters long
+  - `description` - The (short) description of the card
+    - Should be at least 1 and at most 5000 characters long
+  - [`startDate`] The start date of the event represented by the card, only to be used for events that have a fixed start date that makes sense for end users (i.e. a calendar event such as a party starts 10 january 12:00).
+    - Optional
+    - Should be a valid ISO 8601 date string
+    - Should be before `endDate`
+  - [`endDate`] The end date of the event represented by the card, only to be used for events that have a fixed end date that makes sense for end users (i.e. a calendar event such as a party ends 14 january 12:00)
+    - Optional
+    - Should be a valid ISO 8601 date string
+    - Should be after `startDate`
+  - [`publishedAt`] The publication date of the card (i.e. the date the data record was created in *your* system)
+    - Optional
+    - Should be a valid ISO 8601 date string, defaults to today
+    - Should not be after `expiresAt`
+  - [`expiresAt`] The date a card should expire (and is unpublished, and no longer visible to Tippiq users)
+    - Optional
+    - Should be a valid ISO 8601 date string
+    - Should not be before `publishedAt`
+  - `authorId` The author of the card (i.e. the creator of the (content in) the card)
+    - Should be the UUID of an existing user or organization in the Tippiq system
+    - *The authorId will be provided to you by Tippiq*
+  - `publisherId` The publisher of the card (i.e. the publisher of the (content in) the card)
+    - Should be the UUID of an existing user or organization in the Tippiq system
+    - *The publisherId will be provided to you by Tippiq*
+  - `documentType` The document type of the card
+    - 'GenericCard' is the recommended document type, which supports dynamic blocks
+    - See the example value of the `documentType` property below
+  - `document` Content properties for the card (depends on `documentType`)
+    - Should be a key-value object of properties
+    - All property names should be alphanumeric strings and start with a letter
+  - `locations` - The location(s) of the card
+    - At least one location should be set
+    - Every location needs to have at least an `address` or `geometry` property set, or both
+      - location.`addresses`
+        - Should be valid Dutch addresses
+        - Should contain all fields documented below with these exceptions:
+          - `type` StreetAddress - province is optional
+          - `type` CityAddress - municipality and province are optional
+      - location.`geometry` - should be valid GeoJson
+      - All possible location types (address or geometry) are documented below.
+       addresses
+  - `tags` - Tags represent labels that classify cards
+    - Tags should be specified as an array of strings.
+    - Each tag should be an alphanumeric string, start with a letter and be at least 2 characters long
+    - A whitelist of tags that can be used will be provided by Tippiq.
+  - `serviceId` - The Tippiq Service for the card.
+    - Should be the UUID of an existing service in the Tippiq system
+    - *The serviceId will be provided to you by Tippiq*
+  - [`parentId`] - The id of the card
+    - Optional
+    - Should be the UUID of an existing card in the Tippiq system
+    - *If necessary, the parentId will be provided to you by Tippiq*
+is: [secured]
+securedBy: [JWT]
+body:
+  application/json:
+    example: |
+      {
+        "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+        "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+        "title": "Title of the card",
+        "description": "Description of the card",
+        "startDate": "2015-08-03T09:42:14.000Z",
+        "endDate": "2015-08-04T11:47:25.000Z",
+        "publishedAt": "2015-08-03T09:42:14.000Z",
+        "expiresAt": "2015-08-08T11:47:25.000Z",
+        "authorId": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+        "publisherId": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+        "documentType": "GenericCard",
+        "document": {
+          "prop1": "value1",
+          "blocks": [{
+            label: 'Block 1 label',
+            value: 'Block 1 value'
+          }, {
+            label: 'Block 2 label',
+            value: 'Block 2 value'
+          }, {
+            label: 'Block 3 label',
+            value: 'Block 3 value'
+          }]
+        },
+        "tags": ["Taglabel"],
+        "images": {
+          "portrait": "https://example.com/portrait.png",
+          "thumbnail": "https://example.com/thumbnail.png"
+        },
+        "locations": [{
+          "address": {
+            "type": "CityAddress",
+            "city": "Amsterdam",
+            "municipality": "Amsterdam",
+            "province": "Noord-Holland"
+          }},{{
+          "address": {
+            "type": "HouseAddress",
+            "zipcode": {
+              "digits": "1096",
+              "chars": "AB"
+            },
+            "house": {
+              "number": "20",
+              "suffix": "A"
+            }
+          }}, {{
+          "address": {
+            "type": "MunicipalityAddress",
+            "municipality": "Amsterdam",
+            "province": "Noord-Holland"
+          }}, {{
+          "address": {
+            "type": "NetherlandsAddress"
+          }}, {{
+          "address": {
+            "type": "ProvinceAddress",
+            "province": "Noord-Holland"
+          }}, {{
+          "address": {
+            "type": "StreetAddress",
+            "street": "Spaklerweg",
+            "city": "Amsterdam",
+            "province": "Noord-Holland"
+          }}, {{
+          "address": {
+            "type": "ZipcodeAddress",
+            "zipcode": {
+              "digits": "1096",
+            }
+          }}, {{
+          "address": {
+            "type": "ZipcodeAddress",
+            "zipcode": {
+              "digits": "1096",
+              "chars": "AB"
+            }
+          }}, {{
+          "geometry": {
+            "type": "Point",
+            "coordinates": [100.0, 0.0]
+          }}, {{
+          "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [ [100.0, 0.0], [101.0, 1.0] ]
+          }}, {{
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [102.0, 0.0], [103.0, 1.0], [104.0, 0.0], [105.0, 1.0]
+            ]
+          }}, {{
+          "geometry": {
+            "type": "MultiLineString",
+            "coordinates": [
+                             [ [100.0, 0.0], [101.0, 1.0] ],
+                             [ [102.0, 2.0], [103.0, 3.0] ]
+                           ]
+          }}, {{
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]]
+          }}, {{
+          "geometry": {
+            "type": "MultiPolygon",
+            "coordinates": [
+               [[[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0]]],
+               [[[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]],
+                [[100.2, 0.2], [100.8, 0.2], [100.8, 0.8], [100.2, 0.8], [100.2, 0.2]]]
+               ]
+          }}
+        ],
+        "serviceId": "00000000-0000-0000-0000-000000000000"
+      }
+responses:
+  201:
+    headers:
+      Location:
+        example: |
+          /api/cards/7f6c381e-f57b-404c-aef4-cfa76633e68a
+    body:
+      example: |
+        {
+          "success": true,
+          "message": "Created",
+          "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a"
+        }
+  400:
+    body:
+      example: |
+        {
+          "success": false,
+          "message": "Invalid UUID"
+        }
+  404: !include ../../status-codes/404.raml
+  500: !include ../../status-codes/500.raml

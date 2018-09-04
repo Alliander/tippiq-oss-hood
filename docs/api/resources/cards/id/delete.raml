@@ -1,0 +1,20 @@
+is: [secured]
+securedBy: [JWT]
+description: |
+  Remove a specific card.
+
+  When deleting a card, you should be the original creator of the card (i.e. you can only delete your own cards).
+
+  Please note that it is the responsibility of the user to also keep cards up to date, and delete them from the Tippiq system.
+
+  There are two strategies to delete cards:
+
+  1. When inserting, the `id` of the card is returned. If this `id` is stored by the user, it can be used to delete the card later using the `DELETE /api/cards/{id}` endpoint.
+
+  2. Using the feature that `POST /api/cards` is idempotent with regard to the externalId used. Update the card that is to be deleted and set its `expiresAt` property to today. The system will return the `id` of the card. Finally use the `DELETE /api/cards/{id}` endpoint to delete the card completely.
+
+  Note: there is no way to retrieve cards once they are deleted.
+responses:
+  200:
+  404: !include ../../../status-codes/404.raml
+  500: !include ../../../status-codes/500.raml

@@ -1,0 +1,24 @@
+exports[`test Renders 1`] = `
+<div
+  className={undefined}>
+  <p
+    className={undefined}>
+    Tippiq gebruikt Cookies.
+     
+    <a
+      className={undefined}
+      onClick={[Function]}
+      style={Object {}}>
+      Lees hier waarom.
+    </a>
+     
+    Als je doorgaat, accepteer je het gebruik van deze cookies.
+  </p>
+  <button
+    className={undefined}
+    id="btnAgree"
+    onClick={undefined}>
+    Ik ga akkoord
+  </button>
+</div>
+`;

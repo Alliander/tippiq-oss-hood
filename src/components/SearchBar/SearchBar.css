@@ -1,0 +1,7 @@
+@import "../../theme/variables/screen.css";
+
+.ruler {
+  @media (--screen-sm-maxwidth) {
+  	display: none;
+  }
+}

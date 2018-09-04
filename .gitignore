@@ -1,0 +1,17 @@
+# Node
+node_modules
+coverage
+jsdoc
+webpack-assets.json
+webpack-stats.json
+npm-debug.log
+dist
+static/dist
+
+# Other
+.DS_Store
+protractor-screenshots
+
+# IDE
+.idea
+yarn-error.log

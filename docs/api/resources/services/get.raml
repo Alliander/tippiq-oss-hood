@@ -1,0 +1,78 @@
+description: |
+  Retrieve all services
+is: [secured]
+securedBy: [JWT]
+responses:
+  200:
+    body:
+      application/json:
+        example: |
+          [
+            {
+              "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a",
+              "name": "Service Name",
+              "category": "neighboorhood",
+              "description": "Service Description",
+              "shortDescription": "Service short description",
+              "defaultMaxDistance": 200000,
+              "url": "http://www.tippiq.nl",
+              "organization": {
+                "id": "426c381e-f57b-404c-aef4-cfa76633e642",
+                "name": "Test Organization",
+                "bio": "New Bio",
+                "images": {
+                    "card": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/blank.png",
+                    "detail": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/liander_elec-small.png"
+                },
+                "location": {
+                  "type": "HouseAddress",
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          4.91640000125212,
+                          52.3378800041212
+                      ]
+                  },
+                  "nr": "20",
+                  "streetName": "Spaklerweg",
+                  "zipcodeLetters": "BA",
+                  "zipcodeDigits": "1096"
+                }
+              },
+              "isEnabled": true
+            },
+            {
+              "id": "79a5dcb8-ce2d-4a57-9f72-5f251ad86320",
+              "name": "Other Service Name",
+              "category": "care",
+              "description": "Service Description",
+              "shortDescription": "Service short description",
+              "defaultMaxDistance": 200000,
+              "url": "http://www.tippiq.nl",
+              "organization": {
+                "id": "426a381e-f57b-404c-aef4-cfa76633a642",
+                "name": "Test Organization",
+                "bio": "New Bio",
+                "images": {
+                    "card": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/blank.png",
+                    "detail": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/liander_elec-small.png"
+                },
+                "location": {
+                  "type": "HouseAddress",
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          4.91640000125212,
+                          52.3378800041212
+                      ]
+                  },
+                  "nr": "20",
+                  "streetName": "Spaklerweg",
+                  "zipcodeLetters": "BA",
+                  "zipcodeDigits": "1096"
+                }
+              },
+              "isEnabled": false
+            }
+          ]
+  500: !include ../../status-codes/500.raml

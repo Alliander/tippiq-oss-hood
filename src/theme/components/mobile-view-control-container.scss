@@ -1,0 +1,10 @@
+.mobile-view-control-container {
+  display: flex;
+  margin-bottom: 10px;
+  > div {
+    border-right: 1px solid $mobile-view-control-separator-color;
+  }
+  div:last-child {
+    border-right: none;
+  }
+}

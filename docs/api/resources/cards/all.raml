@@ -1,0 +1,10 @@
+get: !include get.raml
+post: !include post.raml
+
+/search:
+  post: !include search/post.raml
+
+/{id}:
+  get: !include id/get.raml
+  put: !include id/put.raml
+  delete: !include id/delete.raml

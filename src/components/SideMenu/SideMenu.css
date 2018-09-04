@@ -1,0 +1,30 @@
+@import "../../theme/variables/colors.css";
+
+.sideMenu {
+  margin-top: 57px;
+  & a {
+    & span {
+      font-weight: 400;
+    }
+    color: #333333;
+  }
+}
+
+.sideMenuMobile {
+  & span {
+    margin-top: 9px;
+    font-weight: 400;
+  }
+}
+
+.subMenu {
+  & a {
+    color: var(--inactiveText);
+    &:hover {
+      color: var(--primary);
+    }
+    & span {
+      padding-left: 20px !important;
+    }
+  }
+}

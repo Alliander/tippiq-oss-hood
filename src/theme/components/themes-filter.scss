@@ -1,0 +1,40 @@
+.theme-filter-container {
+  border-bottom: 1px solid $filter-border-bottom-color;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+
+  .themes-filter {
+    padding-left: 0;
+    list-style: none;
+    li {
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    li > a {
+      color: $inactive-text;
+      display: block;
+      text-decoration: none;
+      &:focus {
+        outline: none;
+      }
+      > span {
+        color: $inactive-text;
+        display: none;
+        float: right;
+        padding-right: 5px;
+      }
+    }
+
+    li.filter-active > a {
+      color: $brand-primary;
+      font-size: 14px;
+      background-color: $filter-active-bg;
+      border-radius: 2px;
+      padding: 5px 0 5px 10px;
+      > span {
+        color: $brand-primary;
+        display: inline;
+      }
+    }
+  }
+}

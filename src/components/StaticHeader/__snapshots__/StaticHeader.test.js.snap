@@ -1,0 +1,48 @@
+exports[`test Renders 1`] = `
+<div
+  className="row">
+  <div
+    className={undefined}>
+    <div
+      className="undefined undefined">
+      <span>
+        Meld je aan voor het Buurtbericht en ontdek jouw buurt!
+      </span>
+    </div>
+    <div
+      className="undefined undefined">
+      <a
+        className="btn btn-primary btn-block"
+        onClick={[Function]}
+        style={Object {}}
+        url="/registreren">
+        Nu aanmelden
+      </a>
+    </div>
+  </div>
+  <div
+    className={undefined}>
+    <ul
+      className={undefined}>
+      <li>
+        <i
+          aria-hidden="true"
+          className="fa fa-check undefined" />
+         Je kunt het overzicht personaliseren
+      </li>
+      <li>
+        <i
+          aria-hidden="true"
+          className="fa fa-check undefined" />
+         Ontvangt wekelijks het buurbericht
+      </li>
+      <li>
+        <i
+          aria-hidden="true"
+          className="fa fa-check undefined" />
+         Stel notificaties in voor diensten
+      </li>
+    </ul>
+  </div>
+</div>
+`;

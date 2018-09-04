@@ -1,0 +1,11 @@
+.wrapper {
+  display: inline;
+}
+
+.text {
+  padding-right: 5px;
+}
+
+.button {
+  margin-bottom: 2px;
+}

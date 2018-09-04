@@ -1,0 +1,19 @@
+.heading {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.panel {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.listGroup {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listGroupItem {
+  background-color: #fff;
+}

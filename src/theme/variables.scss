@@ -1,0 +1,44 @@
+// Colors
+$brand-primary: #60cda2;
+$state-danger-text: #ef2942;
+
+// Base font
+$font-size-base: 16px !default;
+$font-weight-base: 300;
+$font-family-sans-serif: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
+// Headings
+$font-size-h1: $font-size-base * 2.125;
+$headings-line-height: 1.2;
+$headings-font-weight: 600;
+
+// Containers
+$container-desktop: 910px;
+$container-large-desktop: 910px;
+
+// Panels
+$panel-bg: #f3f3f3;
+$panel-border-radius: 0;
+$panel-default-border: #e4e4e4;
+$panel-body-padding: 30px 36px;
+
+$panel-heading-padding: 30px 36px 0 15px;
+$panel-heading-font-size: $font-size-base;
+$panel-heading-font-weight: 600;
+
+// Forms
+$padding-base-vertical: 10px;
+$input-border: #c7c8c8;
+$input-color-placeholder: #ababab;
+$input-color: #171819;
+$input-border-focus: $input-border;
+$btn-default-border: $brand-primary;
+$btn-default-color: $brand-primary;
+
+// Buttons
+$btn-font-weight: 300;
+
+// Footer
+$footer-bg: #f3f3f3;
+$footer-links-font-size: 14px;
+$footer-height: 93px;

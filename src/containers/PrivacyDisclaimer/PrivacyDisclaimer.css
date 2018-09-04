@@ -1,0 +1,7 @@
+@import "../../theme/variables/screen.css";
+
+.button {
+  @media (--screen-sm-maxwidth) {
+    margin-bottom: 20px;
+  }
+}

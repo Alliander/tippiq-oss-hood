@@ -1,0 +1,643 @@
+<!DOCTYPE HTML><html><head><title>Tippiq API API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/kevinrenskers/raml2html 1.6.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {
+            $('.page-header pre code, .top-resource-description pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
+
+            $('[data-toggle]').click(function() {
+                var selector = $(this).data('target') + ' pre code';
+                $(selector).each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+            });
+
+
+            // open modal on hashes like #_action_get
+            $(window).bind('hashchange', function(e) {
+                var anchor_id = document.location.hash.substr(1); //strip #
+                var element = $('#' + anchor_id);
+
+                // do we have such element + is it a modal?  --> show it
+                if (element.length && element.hasClass('modal')) {
+                    element.modal('show');
+                }
+            });
+
+            // execute hashchange on first page load
+            $(window).trigger('hashchange');
+
+            // remove url fragment on modal hide
+            $('.modal').on('hidden.bs.modal', function() {
+                if(history && history.replaceState) {
+                    history.replaceState({}, '', '#');
+                }
+            });
+        });
+    </script><style>
+        .hljs {
+            background: transparent;
+        }
+        .parent {
+            color: #999;
+        }
+        .list-group-item > .badge {
+            float: none;
+            margin-right: 6px;
+        }
+        .panel-title > .methods {
+            float: right;
+        }
+        .badge {
+            border-radius: 0;
+            text-transform: uppercase;
+            width: 70px;
+            font-weight: normal;
+            color: #f3f3f6;
+            line-height: normal;
+        }
+        .badge_get {
+            background-color: #63a8e2;
+        }
+        .badge_post {
+            background-color: #6cbd7d;
+        }
+        .badge_put {
+            background-color: #22bac4;
+        }
+        .badge_delete {
+            background-color: #d26460;
+        }
+        .badge_patch {
+            background-color: #ccc444;
+        }
+        .list-group, .panel-group {
+            margin-bottom: 0;
+        }
+        .panel-group .panel+.panel-white {
+            margin-top: 0;
+        }
+        .panel-group .panel-white {
+            border-bottom: 1px solid #F5F5F5;
+            border-radius: 0;
+        }
+        .panel-white:last-child {
+            border-bottom-color: white;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        .panel-white .panel-heading {
+            background: white;
+        }
+        .tab-pane ul {
+            padding-left: 2em;
+        }
+        .tab-pane h2 {
+            font-size: 1.2em;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-pane h3 {
+            font-size: 1.1em;
+        }
+        .tab-content {
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+        #sidebar {
+            margin-top: 30px;
+            padding-right: 5px;
+            overflow: auto;
+            height: 90%;
+        }
+        .top-resource-description {
+            border-bottom: 1px solid #ddd;
+            background: #fcfcfc;
+            padding: 15px 15px 0 15px;
+            margin: -15px -15px 10px -15px;
+        }
+        .resource-description {
+            border-bottom: 1px solid #fcfcfc;
+            background: #fcfcfc;
+            padding: 15px 15px 0 15px;
+            margin: -15px -15px 10px -15px;
+        }
+        .resource-description p:last-child {
+            margin: 0;
+        }
+        .list-group .badge {
+            float: left;
+        }
+        .method_description {
+            margin-left: 85px;
+        }
+        .method_description p:last-child {
+            margin: 0;
+        }
+        .list-group-item {
+            cursor: pointer;
+        }
+        .list-group-item:hover {
+            background-color: #f5f5f5;
+        }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Tippiq API API documentation <small>version v4</small></h1><p>https://buurt.tippiq.nl/api</p><h3 id="General"><a href="#General">General</a></h3><p>This document describes the endpoints of the Tippiq Buurt API. Using this API, clients can add cards to the Tippiq Buurt cards stream. There are two steps required:</p><ul><li>Obtain an authentication token from Tippiq ID</li><li>Use the authentication token to authenticate while accessing the Tippiq Buurt API</li></ul><h3 id="Authentication-using-Tippiq-ID"><a href="#Authentication-using-Tippiq-ID">Authentication using Tippiq ID</a></h3><ul><li>Tippiq Buurt provides the client with a unique Client ID and Client Secret.</li><li>Client requests an access token from Tippiq ID (POST <code>https://id.tippiq.nl/api/users/login</code>)<ul><li>Request body: <code>{"email":"&lt;ClientID&gt;","password":"&lt;ClientSecret&gt;","audience": "hood"}</code></li><li>Request header: <code>Content-Type: application/json</code></li></ul></li><li>Tippiq ID validates the request and returns a unique, time-limited JWT authentication token<ul><li>Response body: <code>{"token":"eyJhbGci..."}</code></li></ul></li><li>Client can now make requests to the Tippiq Buurt API, using the JWT for authorization.</li></ul><p>Related reading: <a href="https://auth0.com/blog/2014/12/02/using-json-web-tokens-as-api-keys/">https://auth0.com/blog/2014/12/02/using-json-web-tokens-as-api-keys/</a></p><h3 id="Accessing-the-Tippiq-Buurt-API"><a href="#Accessing-the-Tippiq-Buurt-API">Accessing the Tippiq Buurt API</a></h3><ul><li>All Buurt API access is over HTTPS through <code>https://buurt.tippiq.nl/api</code>.</li><li>The authentication token should be passed to (authenticated) requests to the Tippiq Buurt API:<ul><li>Request header: <code>Authorization: Bearer eyJhbGci...</code></li></ul></li><li>All data is sent and received as JSON.</li></ul><h3 id="Managing-cards"><a href="#Managing-cards">Managing cards</a></h3><ul><li>Cards can be managed using the /cards endpoints</li><li>Clients can choose their own externalId properties for cards to manage updates</li><li>See the endpoints overview below for all details (click to see details per endpoint)</li></ul></div><div class="panel panel-default"><div class="panel-heading"><h3 id="_cards" class="panel-title">/cards</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel__cards"><span class="parent"></span>/cards</a> <span class="methods"><a href="#_cards_get"><span class="badge badge_get">get</span></a> <a href="#_cards_post"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel__cards" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#_cards_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get all cards, with the option to filter.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#_cards_post'" class="list-group-item"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Add a new card. The id of the inserted card is returned.</p><p><strong>Card properties and property requirements:</strong></p><ul><li><code>externalId</code> - An identifier used by the user to uniquely identify (the item on) the card. Can be used to apply updates to the same item based on a user chosen identifier.<ul><li>Should be at least 1 and at most 255 characters long</li><li><em>The <code>POST /api/cards</code> endpoint is idempotent with regard to the externalId.</em></li></ul></li><li><code>title</code> - The title of the card<ul><li>Should be at least 1 and at most 500 characters long</li></ul></li><li><code>description</code> - The (short) description of the card<ul><li>Should be at least 1 and at most 5000 characters long</li></ul></li><li>[<code>startDate</code>] The start date of the event represented by the card, only to be used for events that have a fixed start date that makes sense for end users (i.e. a calendar event such as a party starts 10 january 12:00).<ul><li>Optional</li><li>Should be a valid ISO 8601 date string</li><li>Should be before <code>endDate</code></li></ul></li><li>[<code>endDate</code>] The end date of the event represented by the card, only to be used for events that have a fixed end date that makes sense for end users (i.e. a calendar event such as a party ends 14 january 12:00)<ul><li>Optional</li><li>Should be a valid ISO 8601 date string</li><li>Should be after <code>startDate</code></li></ul></li><li>[<code>publishedAt</code>] The publication date of the card (i.e. the date the data record was created in <em>your</em> system)<ul><li>Optional</li><li>Should be a valid ISO 8601 date string, defaults to today</li><li>Should not be after <code>expiresAt</code></li></ul></li><li>[<code>expiresAt</code>] The date a card should expire (and is unpublished, and no longer visible to Tippiq users)<ul><li>Optional</li><li>Should be a valid ISO 8601 date string</li><li>Should not be before <code>publishedAt</code></li></ul></li><li><code>authorId</code> The author of the card (i.e. the creator of the (content in) the card)<ul><li>Should be the UUID of an existing user or organization in the Tippiq system</li><li><em>The authorId will be provided to you by Tippiq</em></li></ul></li><li><code>publisherId</code> The publisher of the card (i.e. the publisher of the (content in) the card)<ul><li>Should be the UUID of an existing user or organization in the Tippiq system</li><li><em>The publisherId will be provided to you by Tippiq</em></li></ul></li><li><code>documentType</code> The document type of the card<ul><li>&#39;GenericCard&#39; is the recommended document type, which supports dynamic blocks</li><li>See the example value of the <code>documentType</code> property below</li></ul></li><li><code>document</code> Content properties for the card (depends on <code>documentType</code>)<ul><li>Should be a key-value object of properties</li><li>All property names should be alphanumeric strings and start with a letter</li></ul></li><li><code>locations</code> - The location(s) of the card<ul><li>At least one location should be set</li><li>Every location needs to have at least an <code>address</code> or <code>geometry</code> property set, or both<ul><li>location.<code>addresses</code><ul><li>Should be valid Dutch addresses</li><li>Should contain all fields documented below with these exceptions:<ul><li><code>type</code> StreetAddress - province is optional</li><li><code>type</code> CityAddress - municipality and province are optional</li></ul></li></ul></li><li>location.<code>geometry</code> - should be valid GeoJson</li><li>All possible location types (address or geometry) are documented below. addresses</li></ul></li></ul></li><li><code>tags</code> - Tags represent labels that classify cards<ul><li>Tags should be specified as an array of strings.</li><li>Each tag should be an alphanumeric string, start with a letter and be at least 2 characters long</li><li>A whitelist of tags that can be used will be provided by Tippiq.</li></ul></li><li><code>serviceId</code> - The Tippiq Service for the card.<ul><li>Should be the UUID of an existing service in the Tippiq system</li><li><em>The serviceId will be provided to you by Tippiq</em></li></ul></li><li>[<code>parentId</code>] - The id of the card<ul><li>Optional</li><li>Should be the UUID of an existing card in the Tippiq system</li><li><em>If necessary, the parentId will be provided to you by Tippiq</em></li></ul></li></ul></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="_cards_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/cards</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get all cards, with the option to filter.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#_cards_get_request" data-toggle="tab">Request</a></li><li><a href="#_cards_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_cards_get_request"><h3>Query Parameters</h3><ul><li><strong>page</strong>: <em>(number )</em><p>The page to fetch, defaults to 0.</p><p><strong>Example</strong>:</p><pre><code>5</code></pre></li><li><strong>pageSize</strong>: <em>(number )</em><p>Amount of cards to include per page, defaults to 50.</p><p><strong>Example</strong>:</p><pre><code>10</code></pre></li><li><strong>documentType</strong>: <em>(string )</em><p>Exact match by document type.</p><p><strong>Example</strong>:</p><pre>TippiqTipCard</pre></li><li><strong>externalId</strong>: <em>(string )</em><p>Exact match by external id.</p><p><strong>Example</strong>:</p><pre>example-id-42</pre></li><li><strong>serviceId</strong>: <em>(string )</em><p>Exact match by service id.</p><p><strong>Example</strong>:</p><pre>00000000-0000-0000-0000-000000000000</pre></li><li><strong>authorId</strong>: <em>(string )</em><p>Exact match by author id.</p><p><strong>Example</strong>:</p><pre>00000000-0000-0000-0000-000000000000</pre></li><li><strong>publisherId</strong>: <em>(string )</em><p>Exact match by publisher id.</p><p><strong>Example</strong>:</p><pre>00000000-0000-0000-0000-000000000000</pre></li><li><strong>title</strong>: <em>(string )</em><p>Search for cards containing the given string as part of the title (case insensitive).</p><p><strong>Example</strong>:</p><pre>tippiq</pre></li><li><strong>description</strong>: <em>(string )</em><p>Search for cards containing the given string as part of the description (case insensitive).</p><p><strong>Example</strong>:</p><pre>tippiq</pre></li><li><strong>startDate</strong>: <em>(string )</em><p>Search for cards with a start date starting with, between or until the given value. Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.</p><p><strong>Example</strong>:</p><pre>2015-01-01T00:00:00Z...2016-01-01T00:00:00Z</pre></li><li><strong>endDate</strong>: <em>(string )</em><p>Search for cards with an end date starting with, between or until the given value. Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.</p><p><strong>Example</strong>:</p><pre>2015-01-01T00:00:00Z...2016-01-01T00:00:00Z</pre></li><li><strong>published_at</strong>: <em>(string )</em><p>Search for cards with a published at date starting with, between or until the given value. Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.</p><p><strong>Example</strong>:</p><pre>2015-01-01T00:00:00Z...2016-01-01T00:00:00Z</pre></li><li><strong>expires_at</strong>: <em>(string )</em><p>Search for cards with an expires at date starting with, between or until the given value. Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.</p><p><strong>Example</strong>:</p><pre>2015-01-01T00:00:00Z...2016-01-01T00:00:00Z</pre></li><li><strong>created_at</strong>: <em>(string )</em><p>Search for cards with a created at date starting with, between or until the given value. Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.</p><p><strong>Example</strong>:</p><pre>2015-01-01T00:00:00Z...2016-01-01T00:00:00Z</pre></li><li><strong>updated_at</strong>: <em>(string )</em><p>Search for cards with an updated at date starting with, between or until the given value. Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.</p><p><strong>Example</strong>:</p><pre>2015-01-01T00:00:00Z...2016-01-01T00:00:00Z</pre></li></ul></div><div class="tab-pane" id="_cards_get_response"><h2>HTTP status code <a href="https://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a",
+    "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+    "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+    "title": "Title of the card",
+    "description": "Description of the card",
+    "landscapeImage": null,
+    "portraitImage": null,
+    "wideImage": null,
+    "startDate": "2015-08-03T09:42:14.000Z",
+    "endDate": "2015-08-04T11:47:25.000Z",
+    "publishedAt": "2015-08-03T09:42:14.000Z",
+    "expiresAt": "2015-08-08T11:47:25.000Z",
+    "author": null,
+    "publisher": {
+      "id": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+      "name": "Publishing Organization",
+      "bio": "Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo.",
+      "phone": "+31 20 1234567",
+      "email": "info@example.com",
+      "images": {
+        "card": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/blank.png",
+        "detail": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/liander_elec-small.png"
+      },
+      "hideLocation": false,
+      "location": {
+        "id": "b1f4025c-5609-11e5-858a-07060ee6e8ab",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.9164,
+            52.33788
+          ]
+        },
+        "name": "Spaklerweg 20, Amsterdam"
+      }
+    },
+    "documentType": null,
+    "document": null,
+    "tags": [{
+      "id": "&lt;tag-id&gt;"
+      "label": "Tagname"
+    }],
+    "images": {
+      "portrait": "https://example.com/portrait.png",
+      "thumbnail": "https://example.com/thumbnail.png"
+    },
+    "service": {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "",
+      "category": "Wegwerkzaamheden",
+      "url": "http://www..nl",
+      "shortDescription": " service",
+      "description": " service description",
+      "images": {
+        "logo": "http://www..nl/images/logo.png"
+      }
+    }
+  }
+]
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Not Found"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Server Error"
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="_cards_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/cards</h4></div><div class="modal-body"><div class="alert alert-info"><p>Add a new card. The id of the inserted card is returned.</p><p><strong>Card properties and property requirements:</strong></p><ul><li><code>externalId</code> - An identifier used by the user to uniquely identify (the item on) the card. Can be used to apply updates to the same item based on a user chosen identifier.<ul><li>Should be at least 1 and at most 255 characters long</li><li><em>The <code>POST /api/cards</code> endpoint is idempotent with regard to the externalId.</em></li></ul></li><li><code>title</code> - The title of the card<ul><li>Should be at least 1 and at most 500 characters long</li></ul></li><li><code>description</code> - The (short) description of the card<ul><li>Should be at least 1 and at most 5000 characters long</li></ul></li><li>[<code>startDate</code>] The start date of the event represented by the card, only to be used for events that have a fixed start date that makes sense for end users (i.e. a calendar event such as a party starts 10 january 12:00).<ul><li>Optional</li><li>Should be a valid ISO 8601 date string</li><li>Should be before <code>endDate</code></li></ul></li><li>[<code>endDate</code>] The end date of the event represented by the card, only to be used for events that have a fixed end date that makes sense for end users (i.e. a calendar event such as a party ends 14 january 12:00)<ul><li>Optional</li><li>Should be a valid ISO 8601 date string</li><li>Should be after <code>startDate</code></li></ul></li><li>[<code>publishedAt</code>] The publication date of the card (i.e. the date the data record was created in <em>your</em> system)<ul><li>Optional</li><li>Should be a valid ISO 8601 date string, defaults to today</li><li>Should not be after <code>expiresAt</code></li></ul></li><li>[<code>expiresAt</code>] The date a card should expire (and is unpublished, and no longer visible to Tippiq users)<ul><li>Optional</li><li>Should be a valid ISO 8601 date string</li><li>Should not be before <code>publishedAt</code></li></ul></li><li><code>authorId</code> The author of the card (i.e. the creator of the (content in) the card)<ul><li>Should be the UUID of an existing user or organization in the Tippiq system</li><li><em>The authorId will be provided to you by Tippiq</em></li></ul></li><li><code>publisherId</code> The publisher of the card (i.e. the publisher of the (content in) the card)<ul><li>Should be the UUID of an existing user or organization in the Tippiq system</li><li><em>The publisherId will be provided to you by Tippiq</em></li></ul></li><li><code>documentType</code> The document type of the card<ul><li>&#39;GenericCard&#39; is the recommended document type, which supports dynamic blocks</li><li>See the example value of the <code>documentType</code> property below</li></ul></li><li><code>document</code> Content properties for the card (depends on <code>documentType</code>)<ul><li>Should be a key-value object of properties</li><li>All property names should be alphanumeric strings and start with a letter</li></ul></li><li><code>locations</code> - The location(s) of the card<ul><li>At least one location should be set</li><li>Every location needs to have at least an <code>address</code> or <code>geometry</code> property set, or both<ul><li>location.<code>addresses</code><ul><li>Should be valid Dutch addresses</li><li>Should contain all fields documented below with these exceptions:<ul><li><code>type</code> StreetAddress - province is optional</li><li><code>type</code> CityAddress - municipality and province are optional</li></ul></li></ul></li><li>location.<code>geometry</code> - should be valid GeoJson</li><li>All possible location types (address or geometry) are documented below. addresses</li></ul></li></ul></li><li><code>tags</code> - Tags represent labels that classify cards<ul><li>Tags should be specified as an array of strings.</li><li>Each tag should be an alphanumeric string, start with a letter and be at least 2 characters long</li><li>A whitelist of tags that can be used will be provided by Tippiq.</li></ul></li><li><code>serviceId</code> - The Tippiq Service for the card.<ul><li>Should be the UUID of an existing service in the Tippiq system</li><li><em>The serviceId will be provided to you by Tippiq</em></li></ul></li><li>[<code>parentId</code>] - The id of the card<ul><li>Optional</li><li>Should be the UUID of an existing card in the Tippiq system</li><li><em>If necessary, the parentId will be provided to you by Tippiq</em></li></ul></li></ul></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by JWT</div><ul class="nav nav-tabs"><li class="active"><a href="#_cards_post_request" data-toggle="tab">Request</a></li><li><a href="#_cards_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_cards_post_request"><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>(string )</em><p>Valid JWT token.</p></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+  "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+  "title": "Title of the card",
+  "description": "Description of the card",
+  "startDate": "2015-08-03T09:42:14.000Z",
+  "endDate": "2015-08-04T11:47:25.000Z",
+  "publishedAt": "2015-08-03T09:42:14.000Z",
+  "expiresAt": "2015-08-08T11:47:25.000Z",
+  "authorId": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+  "publisherId": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+  "documentType": "GenericCard",
+  "document": {
+    "prop1": "value1",
+    "blocks": [{
+      label: &#x27;Block 1 label&#x27;,
+      value: &#x27;Block 1 value&#x27;
+    }, {
+      label: &#x27;Block 2 label&#x27;,
+      value: &#x27;Block 2 value&#x27;
+    }, {
+      label: &#x27;Block 3 label&#x27;,
+      value: &#x27;Block 3 value&#x27;
+    }]
+  },
+  "tags": ["Taglabel"],
+  "images": {
+    "portrait": "https://example.com/portrait.png",
+    "thumbnail": "https://example.com/thumbnail.png"
+  },
+  "locations": [{
+    "address": {
+      "type": "CityAddress",
+      "city": "Amsterdam",
+      "municipality": "Amsterdam",
+      "province": "Noord-Holland"
+    }},{{
+    "address": {
+      "type": "HouseAddress",
+      "zipcode": {
+        "digits": "1096",
+        "chars": "AB"
+      },
+      "house": {
+        "number": "20",
+        "suffix": "A"
+      }
+    }}, {{
+    "address": {
+      "type": "MunicipalityAddress",
+      "municipality": "Amsterdam",
+      "province": "Noord-Holland"
+    }}, {{
+    "address": {
+      "type": "NetherlandsAddress"
+    }}, {{
+    "address": {
+      "type": "ProvinceAddress",
+      "province": "Noord-Holland"
+    }}, {{
+    "address": {
+      "type": "StreetAddress",
+      "street": "Spaklerweg",
+      "city": "Amsterdam",
+      "province": "Noord-Holland"
+    }}, {{
+    "address": {
+      "type": "ZipcodeAddress",
+      "zipcode": {
+        "digits": "1096",
+      }
+    }}, {{
+    "address": {
+      "type": "ZipcodeAddress",
+      "zipcode": {
+        "digits": "1096",
+        "chars": "AB"
+      }
+    }}, {{
+    "geometry": {
+      "type": "Point",
+      "coordinates": [100.0, 0.0]
+    }}, {{
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [ [100.0, 0.0], [101.0, 1.0] ]
+    }}, {{
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [102.0, 0.0], [103.0, 1.0], [104.0, 0.0], [105.0, 1.0]
+      ]
+    }}, {{
+    "geometry": {
+      "type": "MultiLineString",
+      "coordinates": [
+                       [ [100.0, 0.0], [101.0, 1.0] ],
+                       [ [102.0, 2.0], [103.0, 3.0] ]
+                     ]
+    }}, {{
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [[ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]]
+    }}, {{
+    "geometry": {
+      "type": "MultiPolygon",
+      "coordinates": [
+         [[[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0]]],
+         [[[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]],
+          [[100.2, 0.2], [100.8, 0.2], [100.8, 0.8], [100.2, 0.8], [100.2, 0.2]]]
+         ]
+    }}
+  ],
+  "serviceId": "00000000-0000-0000-0000-000000000000"
+}
+</code></pre></div><div class="tab-pane" id="_cards_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><h3>Headers</h3><ul><li><strong>Location</strong>: <em>(string )</em><p><strong>Example</strong>:</p><pre>/api/cards/7f6c381e-f57b-404c-aef4-cfa76633e68a
+</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": true,
+  "message": "Created",
+  "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Invalid UUID"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Invalid authorization: you don&#x27;t have the right permission"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Not Found"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Server Error"
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel__cards_search"><span class="parent">/cards</span>/search</a> <span class="methods"><a href="#_cards_search_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel__cards_search" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#_cards_search_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Search for cards using the stream logic. Requires a geometry that results will be selected for. The result is relative to this geometry.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="_cards_search_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/cards</span>/search</h4></div><div class="modal-body"><div class="alert alert-info"><p>Search for cards using the stream logic. Requires a geometry that results will be selected for. The result is relative to this geometry.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#_cards_search_post_request" data-toggle="tab">Request</a></li><li><a href="#_cards_search_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_cards_search_post_request"><h3>Query Parameters</h3><ul><li><strong>sort</strong>: <em>(string )</em><p>Determines the sorting algorithm used to sort the resulting cards set. Possible values are &#39;new&#39;, &#39;distance&#39; and &#39;standard&#39; which sort on publicationDate, distance to the supplied location and a custom relevance algorithm that takes into account multiple relevance criteria respectively.</p><p><strong>Example</strong>:</p><pre>standard</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "geometry": {
+    "type": "Point",
+    "coordinates": [100.0, 0.0]
+  }
+}
+</code></pre></div><div class="tab-pane" id="_cards_search_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    "id": "f4cb3010-16a4-486e-a154-19df25500873",
+    "externalId": "Service-Provider-Id",
+    "parentId": null,
+    "title": "Service Provider",
+    "description": "Parent Card of Service Provider",
+    "startDate": "2015-11-30T23:00:00.000Z",
+    "endDate": "2015-12-04T23:00:00.000Z",
+    "publishedAt": "2015-07-31T22:00:00.000Z",
+    "expiresAt": "2015-12-04T23:00:00.000Z",
+    "author": null,
+    "publisher": {
+      "id": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+      "name": "Publishing Organization",
+      "bio": "Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo.",
+      "phone": "+31 20 1234567",
+      "email": "info@example.com",
+      "images": {
+        "card": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/blank.png",
+        "detail": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/liander_elec-small.png"
+      },
+      "hideLocation": false,
+      "location": {
+        "id": "b1f4025c-5609-11e5-858a-07060ee6e8ab",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.9164,
+            52.33788
+          ]
+        },
+        "name": "Spaklerweg 20, Amsterdam",
+        "distance": 37198.3135468628
+      }
+    },
+    "documentType": null,
+    "document": null,
+    "createdAt": "2015-09-07T22:00:00.000Z",
+    "updatedAt": "2015-09-08T22:00:00.000Z"
+    "tags": [{
+      "id": "&lt;tag-id&gt;"
+      "label": "Tagname"
+    }],
+    "images": {
+      "portrait": "https://example.com/portrait.png",
+      "thumbnail": "https://example.com/thumbnail.png"
+    },
+    "service": {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "",
+      "category": "Wegwerkzaamheden",
+      "url": "http://www..nl",
+      "shortDescription": " service",
+      "description": " service description",
+      "images": {
+        "logo": "http://www..nl/images/logo.png"
+      }
+    }
+  },
+  {
+    "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a",
+    "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+    "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+    "title": "Title of the card",
+    "description": "Description of the card",
+    "startDate": "2015-08-03T09:42:14.000Z",
+    "endDate": "2015-08-04T11:47:25.000Z",
+    "publishedAt": "2015-08-03T09:42:14.000Z",
+    "expiresAt": "2015-08-08T11:47:25.000Z",
+    "author": null,
+    "publisher": null,
+    "documentType": null,
+    "document": null,
+    "tags": [{
+      "id": "&lt;tag-id&gt;"
+      "label": "Tagname"
+    }],
+    "images": {
+      "portrait": "https://example.com/portrait.png",
+      "thumbnail": "https://example.com/thumbnail.png"
+    },
+    "service": {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "",
+      "category": "Wegwerkzaamheden",
+      "url": "http://www..nl",
+      "shortDescription": " service",
+      "description": " service description",
+      "images": {
+        "logo": "http://www..nl/images/logo.png"
+      }
+    }
+  }
+]
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Bad Request"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Not Found"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Server Error"
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel__cards__id_"><span class="parent">/cards</span>/{id}</a> <span class="methods"><a href="#_cards__id__get"><span class="badge badge_get">get</span></a> <a href="#_cards__id__put"><span class="badge badge_put">put <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a> <a href="#_cards__id__delete"><span class="badge badge_delete">delete <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel__cards__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#_cards__id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Retrieve a specific card</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#_cards__id__put'" class="list-group-item"><span class="badge badge_put">put <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Update a specific card.</p><p>When updating an existing card, you should be the original creator of the card (i.e. you can only update your own cards). If you specify more information than required, invalid properties will be dropped. Be advised to update cards only if their data actually has changed <strong>for the end user</strong>. A system process which updates the last modified field is often not an actual change for the end user. Updating cards that have not changed may cause them to appear changed to end users. If they don&#39;t see actual change, they might consider your service spammy and disable it.</p><p>There are two strategies to update cards:</p><ol><li><p>When inserting, the <code>id</code> of the card is returned. If this <code>id</code> is stored by the user, it can be used to update the card later using the <code>PUT /api/cards/{id}</code> endpoint.</p></li><li><p>Using the feature that <code>POST /api/cards</code> is idempotent with regard to the externalId used. When an updated version of the same card is posted with the same externalId (free to choose by the user), the existing card with that externalId is updated (instead of creating a new copy).</p></li></ol></div><div class="clearfix"></div></div><div onclick="window.location.href = '#_cards__id__delete'" class="list-group-item"><span class="badge badge_delete">delete <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Remove a specific card.</p><p>When deleting a card, you should be the original creator of the card (i.e. you can only delete your own cards).</p><p>Please note that it is the responsibility of the user to also keep cards up to date, and delete them from the Tippiq system.</p><p>There are two strategies to delete cards:</p><ol><li><p>When inserting, the <code>id</code> of the card is returned. If this <code>id</code> is stored by the user, it can be used to delete the card later using the <code>DELETE /api/cards/{id}</code> endpoint.</p></li><li><p>Using the feature that <code>POST /api/cards</code> is idempotent with regard to the externalId used. Update the card that is to be deleted and set its <code>expiresAt</code> property to today. The system will return the <code>id</code> of the card. Finally use the <code>DELETE /api/cards/{id}</code> endpoint to delete the card completely.</p></li></ol><p>Note: there is no way to retrieve cards once they are deleted.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="_cards__id__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/cards</span>/{id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Retrieve a specific card</p></div><ul class="nav nav-tabs"><li class="active"><a href="#_cards__id__get_request" data-toggle="tab">Request</a></li><li><a href="#_cards__id__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_cards__id__get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string )</em></li></ul></div><div class="tab-pane" id="_cards__id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a",
+  "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+  "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+  "title": "Title of the card",
+  "description": "Description of the card",
+  "landscapeImage": null,
+  "portraitImage": null,
+  "wideImage": null,
+  "startDate": "2015-08-03T09:42:14.000Z",
+  "endDate": "2015-08-04T11:47:25.000Z",
+  "publishedAt": "2015-08-03T09:42:14.000Z",
+  "expiresAt": "2015-08-08T11:47:25.000Z",
+  "author": null,
+  "publisher": {
+    "id": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+    "name": "Publishing Organization",
+    "bio": "Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo.",
+    "phone": "+31 20 1234567",
+    "email": "info@example.com",
+    "images": {
+      "card": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/blank.png",
+      "detail": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/liander_elec-small.png"
+    },
+    "hideLocation": false,
+    "location": {
+      "id": "b1f4025c-5609-11e5-858a-07060ee6e8ab",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.9164,
+          52.33788
+        ]
+      },
+      "name": "Spaklerweg 20, Amsterdam"
+    }
+  },
+  "documentType": null,
+  "document": null,
+  "tags": [{
+    "id": "&lt;tag-id&gt;"
+    "label": "Tagname"
+  }],
+  "images": {
+    "portrait": "https://example.com/portrait.png",
+    "thumbnail": "https://example.com/thumbnail.png"
+  },
+  "service": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "",
+    "category": "Wegwerkzaamheden",
+    "url": "http://www..nl",
+    "shortDescription": " service",
+    "description": " service description",
+    "images": {
+      "logo": "http://www..nl/images/logo.png"
+    }
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Not Found"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Server Error"
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="_cards__id__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent">/cards</span>/{id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update a specific card.</p><p>When updating an existing card, you should be the original creator of the card (i.e. you can only update your own cards). If you specify more information than required, invalid properties will be dropped. Be advised to update cards only if their data actually has changed <strong>for the end user</strong>. A system process which updates the last modified field is often not an actual change for the end user. Updating cards that have not changed may cause them to appear changed to end users. If they don&#39;t see actual change, they might consider your service spammy and disable it.</p><p>There are two strategies to update cards:</p><ol><li><p>When inserting, the <code>id</code> of the card is returned. If this <code>id</code> is stored by the user, it can be used to update the card later using the <code>PUT /api/cards/{id}</code> endpoint.</p></li><li><p>Using the feature that <code>POST /api/cards</code> is idempotent with regard to the externalId used. When an updated version of the same card is posted with the same externalId (free to choose by the user), the existing card with that externalId is updated (instead of creating a new copy).</p></li></ol></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by JWT</div><ul class="nav nav-tabs"><li class="active"><a href="#_cards__id__put_request" data-toggle="tab">Request</a></li><li><a href="#_cards__id__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_cards__id__put_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string )</em></li></ul><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>(string )</em><p>Valid JWT token.</p></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+  "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+  "title": "Title of the card",
+  "description": "Description of the card",
+  "images": {
+    "portrait": "https://images.example.com/portrait.png",
+    "landscape": "https://images.example.com/landscape.png",
+    "wide": "https://images.example.com/wide.png"
+  },
+  "startDate": "2015-08-03T09:42:14.000Z",
+  "endDate": "2015-08-04T11:47:25.000Z",
+  "publishedAt": "2015-08-03T09:42:14.000Z",
+  "expiresAt": "2015-08-08T11:47:25.000Z",
+  "authorId": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+  "publisherId": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+  "locations": [],
+  "tags": ["New tagname"],
+  "documentType": null,
+  "document": null,
+  "serviceId": "00000000-0000-0000-0000-000000000000"
+}
+</code></pre></div><div class="tab-pane" id="_cards__id__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a",
+  "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+  "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+  "title": "Title of the card",
+  "description": "Description of the card",
+  "landscapeImage": null,
+  "portraitImage": null,
+  "wideImage": null,
+  "startDate": "2015-08-03T09:42:14.000Z",
+  "endDate": "2015-08-04T11:47:25.000Z",
+  "publishedAt": "2015-08-03T09:42:14.000Z",
+  "expiresAt": "2015-08-08T11:47:25.000Z",
+  "author": null,
+  "locations": [
+    {
+      "id": "b1f4025c-5609-11e5-858a-07060ee6e8ab",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.9164,
+          52.33788
+        ]
+      },
+      "name": "Spaklerweg 20, Amsterdam"
+    }
+  ],
+  "publisher": {
+    "id": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+    "name": "Publishing Organization",
+    "bio": "Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo.",
+    "phone": "+31 20 1234567",
+    "email": "info@example.com",
+    "images": {
+      "card": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/blank.png",
+      "detail": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/liander_elec-small.png"
+    },
+    "hideLocation": false,
+    "location": {
+      "id": "b1f4025c-5609-11e5-858a-07060ee6e8ab",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.9164,
+          52.33788
+        ]
+      },
+      "name": "Spaklerweg 20, Amsterdam"
+    }
+  },
+  "documentType": null,
+  "document": null,
+  "tags": [{
+    "id": "&lt;tag-id&gt;"
+    "label": "New tagname"
+  }],
+  "images": {
+    "portrait": "https://images.example.com/portrait.png",
+    "landscape": "https://images.example.com/landscape.png",
+    "wide": "https://images.example.com/wide.png"
+  },
+  "service": {
+    "name": "",
+    "category": "Wegwerkzaamheden",
+    "organizationId": "54e0be2e-560a-11e5-9f4d-039a76ea6f5c"
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Invalid authorization: you don&#x27;t have the right permission"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Not Found"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Server Error"
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="_cards__id__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent">/cards</span>/{id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Remove a specific card.</p><p>When deleting a card, you should be the original creator of the card (i.e. you can only delete your own cards).</p><p>Please note that it is the responsibility of the user to also keep cards up to date, and delete them from the Tippiq system.</p><p>There are two strategies to delete cards:</p><ol><li><p>When inserting, the <code>id</code> of the card is returned. If this <code>id</code> is stored by the user, it can be used to delete the card later using the <code>DELETE /api/cards/{id}</code> endpoint.</p></li><li><p>Using the feature that <code>POST /api/cards</code> is idempotent with regard to the externalId used. Update the card that is to be deleted and set its <code>expiresAt</code> property to today. The system will return the <code>id</code> of the card. Finally use the <code>DELETE /api/cards/{id}</code> endpoint to delete the card completely.</p></li></ol><p>Note: there is no way to retrieve cards once they are deleted.</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by JWT</div><ul class="nav nav-tabs"><li class="active"><a href="#_cards__id__delete_request" data-toggle="tab">Request</a></li><li><a href="#_cards__id__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_cards__id__delete_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string )</em></li></ul><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>(string )</em><p>Valid JWT token.</p></li></ul></div><div class="tab-pane" id="_cards__id__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Invalid authorization: you don&#x27;t have the right permission"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Not Found"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "success": false,
+  "message": "Server Error"
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#_cards">/cards</a></li></ul></div></div></div></div></body></html>

@@ -1,0 +1,63 @@
+@import "../../theme/variables/screen.css";
+
+.title {
+  margin: 6px 0 30px 0;
+}
+
+.mainContent {
+  margin-top: 32px;
+}
+
+.blockHeader {
+  margin-top: 0;
+}
+
+.blockContent {
+  margin-bottom: 20px;
+}
+
+.blockButton {
+  background-color: #45bc8f;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+.highlight {
+  color: #000;
+}
+
+.navigationWrapper {
+  @media (--screen-sm-minwidth) { 
+    max-width: 220px;
+    padding-left: 0;
+    width: 22.5%;
+  }
+}
+
+.wrapper {
+  @media (--screen-sm-maxwidth) {
+    background-color: #eeeeee;
+    border-top: #dddddd;
+    padding-top: 10px;
+  }
+  padding-bottom: 30px;
+}
+
+.gridHolder {
+  position: inherit;
+  width: 77.5%;
+  padding-right: 0;
+
+  @media (--screen-sm-maxwidth) {
+    width: 100%;
+    padding-right: 15px;
+  }
+}
+
+.alignWithBottom {
+  position: relative;
+  padding-top: 11px;
+}

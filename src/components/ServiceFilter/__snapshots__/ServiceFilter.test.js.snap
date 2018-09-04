@@ -1,0 +1,9 @@
+exports[`test Renders 1`] = `
+<div
+  className="service-filter-container-mobile">
+  <h2>
+    Diensten
+  </h2>
+  <form />
+</div>
+`;

@@ -1,0 +1,28 @@
+exports[`test Renders 1`] = `
+<div
+  className={undefined}>
+  <h2>
+    Weergave
+  </h2>
+  <div
+    className="undefined undefined">
+    <i
+      className="fa fa-heart undefined" />
+    <span
+      className={undefined}>
+      Mijn selectie
+    </span>
+    <i
+      className="fa fa-cog undefined" />
+  </div>
+  <div
+    className={undefined}>
+    <i
+      className="fa fa-globe undefined" />
+    <span
+      className={undefined}>
+      Alle bronnen
+    </span>
+  </div>
+</div>
+`;

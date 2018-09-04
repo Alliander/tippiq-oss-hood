@@ -1,0 +1,41 @@
+@import "../../theme/variables/colors.css";
+@import "../../theme/variables/fonts.css";
+
+.serviceFilterContainer {
+  border-bottom: 1px solid var(--filterBorderBottomColor);
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+
+  &:hover {
+    color: var(--primary);
+    cursor: pointer;
+  }
+}
+
+.serviceFilterItem {
+  display: inline;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 11px;
+  margin-top: 22px;
+  line-height: 1.2;
+}
+
+.serviceFilterIcon {
+  color: var(--chevronInactiveColor);
+  margin-top: 4px;
+  
+  &:hover {
+    color: primary;
+    curser: pointer;
+  }
+}
+
+.serviceFilterServicesContainer {
+  color: var(--inactiveText);
+  padding-top: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}

@@ -1,0 +1,121 @@
+description: |
+  Search for cards using the stream logic.
+  Requires a geometry that results will be selected for. The result is relative to this geometry.
+body:
+  application/json:
+    example: |
+      {
+        "geometry": {
+          "type": "Point",
+          "coordinates": [100.0, 0.0]
+        }
+      }
+queryParameters:
+  sort:
+    description: |
+      Determines the sorting algorithm used to sort the resulting cards set. Possible values are 'new', 'distance' and 'standard' which sort on publicationDate, distance to the supplied location and a custom relevance algorithm that takes into account multiple relevance criteria respectively.
+    type: string
+    example: standard
+responses:
+  200:
+    body:
+      application/json:
+        example: |
+          [
+            {
+              "id": "f4cb3010-16a4-486e-a154-19df25500873",
+              "externalId": "Service-Provider-Id",
+              "parentId": null,
+              "title": "Service Provider",
+              "description": "Parent Card of Service Provider",
+              "startDate": "2015-11-30T23:00:00.000Z",
+              "endDate": "2015-12-04T23:00:00.000Z",
+              "publishedAt": "2015-07-31T22:00:00.000Z",
+              "expiresAt": "2015-12-04T23:00:00.000Z",
+              "author": null,
+              "publisher": {
+                "id": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+                "name": "Publishing Organization",
+                "bio": "Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo.",
+                "phone": "+31 20 1234567",
+                "email": "info@example.com",
+                "images": {
+                  "card": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/blank.png",
+                  "detail": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/liander_elec-small.png"
+                },
+                "hideLocation": false,
+                "location": {
+                  "id": "b1f4025c-5609-11e5-858a-07060ee6e8ab",
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                      4.9164,
+                      52.33788
+                    ]
+                  },
+                  "name": "Spaklerweg 20, Amsterdam",
+                  "distance": 37198.3135468628
+                }
+              },
+              "documentType": null,
+              "document": null,
+              "createdAt": "2015-09-07T22:00:00.000Z",
+              "updatedAt": "2015-09-08T22:00:00.000Z"
+              "tags": [{
+                "id": "<tag-id>"
+                "label": "Tagname"
+              }],
+              "images": {
+                "portrait": "https://example.com/portrait.png",
+                "thumbnail": "https://example.com/thumbnail.png"
+              },
+              "service": {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "name": "",
+                "category": "Wegwerkzaamheden",
+                "url": "http://www..nl",
+                "shortDescription": "service",
+                "description": "service description",
+                "images": {
+                  "logo": "http://www..nl/images/logo.png"
+                }
+              }
+            },
+            {
+              "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a",
+              "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+              "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+              "title": "Title of the card",
+              "description": "Description of the card",
+              "startDate": "2015-08-03T09:42:14.000Z",
+              "endDate": "2015-08-04T11:47:25.000Z",
+              "publishedAt": "2015-08-03T09:42:14.000Z",
+              "expiresAt": "2015-08-08T11:47:25.000Z",
+              "author": null,
+              "publisher": null,
+              "documentType": null,
+              "document": null,
+              "tags": [{
+                "id": "<tag-id>"
+                "label": "Tagname"
+              }],
+              "images": {
+                "portrait": "https://example.com/portrait.png",
+                "thumbnail": "https://example.com/thumbnail.png"
+              },
+              "service": {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "name": "",
+                "category": "Wegwerkzaamheden",
+                "url": "http://www..nl",
+                "shortDescription": "service",
+                "description": "service description",
+                "images": {
+                  "logo": "http://www..nl/images/logo.png"
+                }
+              }
+            }
+          ]
+  404: !include ../../../status-codes/404.raml
+  500: !include ../../../status-codes/500.raml
+  400: !include ../../../status-codes/400.raml

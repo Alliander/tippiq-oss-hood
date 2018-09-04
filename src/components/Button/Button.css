@@ -1,0 +1,78 @@
+@import "../../theme/variables/screen.css";
+@import "../../theme/variables/colors.css";
+
+.notResponsiveButton {
+  width: auto;
+  padding: 10px 30px;
+  display: inline-block;
+  @media (--screen-sm-maxwidth) {
+    width: 100%;
+  }
+}
+
+.link {
+  background: transparent;
+  border: 0;
+  color: var(--primary);
+  text-transform: uppercase;
+  padding-top: 0;
+  padding: 0;
+
+  &:hover, 
+  &:active,
+  &:focus {
+    background-color: transparent !important;
+    border: 0;
+    color: var(--primary);
+  }
+
+  &.notResponsiveButton {
+    @media (--screen-sm-maxwidth) {
+      text-align: left;
+    }
+  }
+}
+
+/* Example 
+.customButtom1 {
+  background: #000;
+  color: #FFF;
+  text-transform: uppercase;
+  margin-top: 30px;
+
+  &:link {
+
+  }
+
+  &:hover {
+
+  }
+
+  &:active {
+
+  }
+
+  &:focus {
+
+  }
+
+  &:visited {
+
+  }
+
+  &:hover, 
+  &:active,
+  &:focus {
+    background-color: #FFF;
+    color: #000;
+  }
+
+  &::after {
+
+  }
+
+  &::before {
+
+  };
+}
+*/

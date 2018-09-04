@@ -1,0 +1,36 @@
+@import "../../theme/variables/screen.css";
+
+.wrapper {
+  @media (--screen-sm-maxwidth) {
+    background-color: #eeeeee;
+    border-top: #dddddd;
+    padding-top: 10px;
+  }
+  padding-bottom: 30px;
+}
+
+.bodyBlock {
+  margin-top: 40px;
+}
+
+.subHeader {
+  margin: 0;
+}
+
+.button {
+  background: #60CDA2;
+  border: 1px solid #4DC799;
+  color: #FFF;
+
+  &:hover, 
+  &:active,
+  &:focus {
+    background-color: #60CDA2;
+    border: 1px solid #33A379;
+    color: #FFF;
+  }
+
+  @media (--screen-sm-maxwidth) {
+    margin-bottom: 20px;
+  }
+}

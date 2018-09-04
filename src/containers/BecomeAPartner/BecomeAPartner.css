@@ -1,0 +1,44 @@
+@import "../../theme/variables/colors.css";
+
+.checkmarkList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 30px;
+
+  & li {
+     margin-bottom: 20px;
+     & h4 {
+        color: var(--primary);
+     }
+  }
+
+  & li {
+    display: flex;
+    &:before {
+      font-family: FontAwesome;
+      content: "\F00C";
+      padding: 5px;
+      margin-right: 5px;
+      margin-top: -5px;
+      color: var(--primary);
+    }
+  }
+}
+
+.testimonial {
+  font-style: italic;
+}
+
+.mediaSmall {
+  padding-right: 20px;
+}
+
+.mediaLarge {
+  padding-right: 30px;
+}
+
+.partner {
+  color: var(--primary);
+  font-weight: bold;
+}

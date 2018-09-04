@@ -1,0 +1,22 @@
+exports[`test Renders 1`] = `
+<div
+  id="page-styleguide">
+  <div
+    className="container">
+    <h1>
+      Heading 
+      <mark>
+        1
+      </mark>
+    </h1>
+    <p>
+      This is a paragraph with a 
+      <a
+        href="https://www.tippiq.nl">
+        link
+      </a>
+      .
+    </p>
+  </div>
+</div>
+`;

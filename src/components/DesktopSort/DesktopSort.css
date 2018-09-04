@@ -1,0 +1,10 @@
+@import "../../theme/variables/colors.css";
+
+.wrapper {
+  display: inline;
+}
+
+.dropDownbutton {
+  border-right: 1px solid var(--borderRightColor);
+}
+

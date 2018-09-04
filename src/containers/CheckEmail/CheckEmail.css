@@ -1,0 +1,60 @@
+@import "../../theme/variables/screen.css";
+@import "../../theme/variables/colors.css";
+
+.checkEmailPage {
+  composes: mainPageWrapper from '../../theme/variables/screen.css';
+}
+
+.wrapper {
+  composes: mainContentWrapper from '../../theme/variables/screen.css';
+  @media (--screen-sm-maxwidth) {
+    background-color: #eeeeee;
+    border-top: #dddddd;
+    padding-top: 10px;
+  }
+  padding-bottom: 30px;
+}
+
+.mainContent {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  @media (--screen-sm-maxwidth) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.headingText {
+  margin: 0;
+}
+
+.headingTextColor {
+  color: var(--primary);
+  @media (--screen-sm-maxwidth) {
+    display: block;
+    margin-top: 20px;
+  }
+}
+
+.imageHolder {
+  display: flex;
+  align-items: flex-center;
+  justify-content: center;
+}
+
+.contentHolder {
+  position: inherit;
+  width: 77.5%;
+  padding-right: 0;
+  display: flex;
+  flex-direction: column;
+
+  @media (--screen-sm-maxwidth) {
+    width: 100%;
+    padding-right: 15px;
+  }
+}
+

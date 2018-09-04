@@ -1,0 +1,10 @@
+exports[`test Renders 1`] = `
+<div
+  className="theme-filter-container">
+  <h2>
+    Thema\'s
+  </h2>
+  <ul
+    className="themes-filter" />
+</div>
+`;

@@ -1,0 +1,23 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": [
+      "src"
+    ],
+    "includePattern": ".+\\.js$",
+    "exclude": [
+      "src/reducers/register.js",
+      "src/reducers/autoCreate.js",
+      "src/helpers/index.js",
+      "src/containers/index.js"
+    ]
+  },
+  "opts": {
+    "encoding": "utf8",
+    "destination": "jsdoc/src",
+    "recurse": true,
+    "verbose": true
+  }
+}

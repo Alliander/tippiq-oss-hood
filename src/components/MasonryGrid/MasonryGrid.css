@@ -1,0 +1,7 @@
+@import "../../theme/variables/screen.css";
+
+.masonWrapper {
+  @media (--screen-sm-maxwidth) {
+    width: 100%!important;
+  }
+}

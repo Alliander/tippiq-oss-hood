@@ -1,0 +1,67 @@
+description: |
+  Retrieve a specific card
+responses:
+  200:
+    body:
+      example: |
+        {
+          "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a",
+          "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+          "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+          "title": "Title of the card",
+          "description": "Description of the card",
+          "landscapeImage": null,
+          "portraitImage": null,
+          "wideImage": null,
+          "startDate": "2015-08-03T09:42:14.000Z",
+          "endDate": "2015-08-04T11:47:25.000Z",
+          "publishedAt": "2015-08-03T09:42:14.000Z",
+          "expiresAt": "2015-08-08T11:47:25.000Z",
+          "author": null,
+          "publisher": {
+            "id": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+            "name": "Publishing Organization",
+            "bio": "Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo.",
+            "phone": "+31 20 1234567",
+            "email": "info@example.com",
+            "images": {
+              "card": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/blank.png",
+              "detail": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/liander_elec-small.png"
+            },
+            "hideLocation": false,
+            "location": {
+              "id": "b1f4025c-5609-11e5-858a-07060ee6e8ab",
+              "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  4.9164,
+                  52.33788
+                ]
+              },
+              "name": "Spaklerweg 20, Amsterdam"
+            }
+          },
+          "documentType": null,
+          "document": null,
+          "tags": [{
+            "id": "<tag-id>"
+            "label": "Tagname"
+          }],
+          "images": {
+            "portrait": "https://example.com/portrait.png",
+            "thumbnail": "https://example.com/thumbnail.png"
+          },
+          "service": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "",
+            "category": "Wegwerkzaamheden",
+            "url": "http://www..nl",
+            "shortDescription": "service",
+            "description": "service description",
+            "images": {
+              "logo": "http://www..nl/images/logo.png"
+            }
+          }
+        }
+  404: !include ../../../status-codes/404.raml
+  500: !include ../../../status-codes/500.raml

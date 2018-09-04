@@ -1,0 +1,29 @@
+{% macro tdCard(card) %}
+	{% if card %}
+	    {{ card.title | truncate(40) }}
+	    {{ card.description | truncate(80) }}
+
+	    Ga, om deze kaart te bekijken, in je browser naar:
+		{{ frontendBaseUrl }}/ga-naar/{{ card.id }}
+
+	   {{ card.service.name }}
+	{% endif %}
+{% endmacro %}
+
+{% for category, cards in places.cards %}
+	{{ category }}
+	{% for card in cards %}
+	    {{ tdCard(card) }}
+	{% endfor %}
+
+{% endfor %}
+
+{% if highlightAreaContent %}
+  Uitgelicht
+
+  {{ highlightAreaContent | safe }}
+{% endif %}
+
+{% if unsubscribeUrl %}
+	Meld je af voor deze email: {{ unsubscribeUrl }}
+{% endif %}

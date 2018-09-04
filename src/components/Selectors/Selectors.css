@@ -1,0 +1,35 @@
+@import "../../theme/variables/colors.css";
+@import "../../theme/variables/fonts.css";
+
+.viewSelectorContainer {
+  border-bottom: 1px solid var(--filterBorderBottomColor);
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+}
+
+.mainSelector {
+  cursor: pointer;
+  color: var(--inactiveText);
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.mainSelectorIcon {
+  &:first-child {
+    width: 30px;  
+  }
+}
+
+.text {
+  flex: 2;
+}
+.active {
+  color: var(--active);
+  &> span {
+    font-weight: 500;
+  }
+}
+
+

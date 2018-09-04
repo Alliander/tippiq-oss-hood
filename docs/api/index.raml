@@ -1,0 +1,76 @@
+#%RAML 0.8
+title: Tippiq API
+version: v4
+baseUri: https://buurt.tippiq.nl/api
+mediaType: application/json
+
+documentation:
+  - title: General
+    content: |
+      This document describes the endpoints of the Tippiq Buurt API.
+      Using this API, clients can add cards to the Tippiq Buurt cards stream.
+      There are two steps required:
+      - Obtain an authentication token from Tippiq ID
+      - Use the authentication token to authenticate while accessing the Tippiq Buurt API
+
+  - title: Authentication using Tippiq ID
+    content: |
+      - Tippiq Buurt provides the client with a unique Client ID and Client Secret.
+      - Client requests an access token from Tippiq ID (POST `https://id.tippiq.nl/api/users/login`)
+          - Request body: `{"email":"<ClientID>","password":"<ClientSecret>","audience": "228d7b60-d7e1-11e6-8e1d-83f8ab465f40"}`
+          - Request header: `Content-Type: application/json`
+      - Tippiq ID validates the request and returns a unique, time-limited
+        JWT authentication token
+          - Response body: `{"token":"eyJhbGci..."}`
+      - Client can now make requests to the Tippiq Buurt API, using the JWT for authorization.
+
+      Related reading: https://auth0.com/blog/2014/12/02/using-json-web-tokens-as-api-keys/
+
+  - title: Accessing the Tippiq Buurt API
+    content: |
+      - All Buurt API access is over HTTPS through `https://buurt.tippiq.nl/api`.
+      - The authentication token should be passed to (authenticated) requests to the Tippiq Buurt API:
+          - Request header: `Authorization: Bearer eyJhbGci...`
+      - All data is sent and received as JSON.
+
+  - title: Managing cards
+    content: |
+      - Cards can be managed using the /cards endpoints
+      - Clients can choose their own externalId properties for cards to manage updates
+      - See the endpoints overview below for all details (click to see details per endpoint)
+
+securitySchemes:
+  - JWT:
+      description: |
+        Authorization with JWT usage header "Authorization" with token.
+      type: x-jwt
+      describedBy:
+          headers:
+              Authorization:
+                  description: |
+                     Valid JWT token
+                  example: |
+                     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
+          responses:
+              403:
+                description: |
+                     Invalid authorization: you don't have the right permission
+
+traits:
+  - secured:
+      headers:
+        Authorization:
+          description: Valid JWT token.
+      responses:
+        403:
+          body:
+            application/json:
+              example: |
+                {
+                  "success": false,
+                  "message": "Invalid authorization: you don't have the right permission"
+                }
+
+
+/cards: !include resources/cards/all.raml
+#/services: !include resources/services/all.raml

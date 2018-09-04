@@ -1,0 +1,24 @@
+exports[`test Renders 1`] = `
+<div
+  className={undefined}>
+  <span>
+    Weergave:
+  </span>
+  <button
+    className="btn btn-link"
+    disabled={false}
+    type="button">
+    <i
+      className="fa fa-th-large undefined" />
+    Lijst
+  </button>
+  <button
+    className="btn btn-link"
+    disabled={false}
+    type="button">
+    <i
+      className="fa fa-map-marker undefined" />
+    Kaart
+  </button>
+</div>
+`;

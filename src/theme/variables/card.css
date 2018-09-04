@@ -1,0 +1,9 @@
+:root {
+  --cardHeight: 350px;
+  --cardContentHeight: 175px;
+  --cardBgColor: #FFF;
+  --cardBoxShadow: rgba(0,0,0,0.30);
+  --cardInfoBgColor: #f3f3f3;
+  --cardInfoTextColor: #333;
+  --cardActionsBgColor: #f3f3f3;
+}

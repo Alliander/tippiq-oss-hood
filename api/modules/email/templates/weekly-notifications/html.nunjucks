@@ -1,0 +1,85 @@
+{% extends templatePath + "/../base-weekly-email/html.nunjucks" %}
+{% block content %}
+
+  {% macro tdCard(card) %}
+    {% if card %}
+      <td class="card" align="left" width="560" height="125">
+        <table>
+          <tr>
+            <td class="cardImageHolder" width="180" height="127">
+              <a class="link" href="{{ frontendBaseUrl }}/ga-naar/{{ card.id }}">
+                <div class="cardImageContainer">
+                  <div class="cardImage" style="background-image:url({{ card.images.landscape }});"></div>
+                </div>
+              </a>
+            </td>
+            <td class="cardTextHolder" width="380" height="127">
+              <h3>{{ card.title | truncate(40) }}</h3>
+              <p class="textDescription">{{ card.description | truncate(80) }} </p>
+              <a class="link" href="{{ frontendBaseUrl }}/ga-naar/{{ card.id }}">
+                <div class="service">
+                  <div class="serviceImageContainer">
+                    <div class="serviceImage" style="background-image:url({{ card.service.images.logo }});"></div>
+                  </div>
+                  <p class="serviceName">{{ card.service.name }}</p>
+                </div>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    {% endif %}
+  {% endmacro %}
+
+  {% for category, cards in places.cards %}
+    <table class="mainCardTable" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="cardHolder">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="categoryTitleHolder">
+                <span class="categoryTitle">{{ category }}</span>
+              </td>
+              <td class="categoryTextHolder">
+                <a href="{{ frontendBaseUrl }}/mijn-buurt/themas/{{ category }}?token={{ loginToken }}"/>
+                  <h3 class="textHeader">
+                    Bekijk alles van dit thema
+                    <img src="{{ frontendTippiqIdBaseUrl }}/static/images/email/arrow.gif" alt="Arrow icon" />
+                  </h3>
+                </a>
+              </td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            {% for card in cards %}
+              <tr>
+                {{ tdCard(card) }}
+              </tr>
+              {% if loop.index < cards.length %}
+              <tr>
+                <td class="row-spacer"></td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+          </table>
+        </td>
+      </tr>
+    </table>
+
+  {% endfor %}
+
+  {% if highlightAreaContent %}
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td class="row-spacer"></td>
+    </tr>
+    <tr>
+      <td class="highlightArea">
+        <h4 class="highlightAreaTitle">Uitgelicht</h4>
+        {{ highlightAreaContent | safe }}
+      </td>
+    </tr>
+  </table>
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,34 @@
+@import "../../theme/variables/card.css";
+
+.cardInfo {
+  align-items: center;
+  background-color: var(--cardInfoBgColor);
+  display: flex;
+  height: 67px;
+  left: 0;
+  padding: 10px;
+  width: 100%;
+}
+
+.logo {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid #DDD;
+  height: 40px;
+  width: 40px;
+}
+
+.title {
+  color: var(--cardInfoTextColor);
+  font-size: 14px;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-right: 10px;
+  flex: 2;
+  display: flex;
+}
+
+.bottom {
+  bottom: 0;
+}

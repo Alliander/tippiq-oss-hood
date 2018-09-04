@@ -1,0 +1,55 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:jasmine/recommended",
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "jasmine": true,
+    "protractor": true,
+    "jest": true,
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "mocha",
+    "jasmine",
+  ],
+  "rules": {
+    "arrow-parens": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "off",
+    "import/prefer-default-export" : "off",
+    "react/no-unused-prop-types" : "off",
+    "class-methods-use-this" : "off",
+    "react/forbid-prop-types" : "off",
+    "react/sort-comp": "off",
+    "complexity": ["error", 5],
+    "jasmine/no-spec-dupes": 0,
+    "max-depth": ["error", 3],
+    "max-params": ["error", 4],
+    "max-statements": ["error",15],
+    "mocha/no-exclusive-tests": 2,
+    "react/prefer-stateless-function": "off",
+    "react/jsx-filename-extension": "off",
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": true,
+        "ClassDeclaration": true,
+      }
+    }],
+    "valid-jsdoc": 2,
+  },
+  "globals": {
+    "__CLIENT__": true,
+    "__SERVER__": false,
+    "__DEVELOPMENT__": false,
+    "__DEVTOOLS__": false,
+    "__SSR__": true,
+    "__DEBUG__": true,
+    "__STATIC__": true,
+  },
+}

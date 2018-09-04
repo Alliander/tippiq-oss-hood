@@ -1,0 +1,151 @@
+description: |
+    Get all cards, with the option to filter.
+queryParameters:
+  page:
+    description: |
+      The page to fetch, defaults to 0.
+    type: number
+    example: 5
+  pageSize:
+    description: |
+      Amount of cards to include per page, defaults to 50.
+    type: number
+    example: 10
+  documentType:
+    description: |
+      Exact match by document type.
+    type: string
+    example: TippiqTipCard
+  externalId:
+    description: |
+      Exact match by external id.
+    type: string
+    example: example-id-42
+  serviceId:
+    description: |
+      Exact match by service id.
+    type: string
+    example: 00000000-0000-0000-0000-000000000000
+  authorId:
+    description: |
+      Exact match by author id.
+    type: string
+    example: 00000000-0000-0000-0000-000000000000
+  publisherId:
+    description: |
+      Exact match by publisher id.
+    type: string
+    example: 00000000-0000-0000-0000-000000000000
+  title:
+    description: |
+      Search for cards containing the given string as part of the title (case insensitive).
+    type: string
+    example: tippiq
+  description:
+    description: |
+      Search for cards containing the given string as part of the description (case insensitive).
+    type: string
+    example: tippiq
+  startDate:
+    description: |
+      Search for cards with a start date starting with, between or until the given value.
+      Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.
+    type: string
+    example: 2015-01-01T00:00:00Z...2016-01-01T00:00:00Z
+  endDate:
+    description: |
+      Search for cards with an end date starting with, between or until the given value.
+      Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.
+    type: string
+    example: 2015-01-01T00:00:00Z...2016-01-01T00:00:00Z
+  published_at:
+    description: |
+      Search for cards with a published at date starting with, between or until the given value.
+      Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.
+    type: string
+    example: 2015-01-01T00:00:00Z...2016-01-01T00:00:00Z
+  expires_at:
+    description: |
+      Search for cards with an expires at date starting with, between or until the given value.
+      Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.
+    type: string
+    example: 2015-01-01T00:00:00Z...2016-01-01T00:00:00Z
+  created_at:
+    description: |
+      Search for cards with a created at date starting with, between or until the given value.
+      Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.
+    type: string
+    example: 2015-01-01T00:00:00Z...2016-01-01T00:00:00Z
+  updated_at:
+    description: |
+      Search for cards with an updated at date starting with, between or until the given value.
+      Specify two dates using the ... as separator. Dates must be in UTC, formatted as ISO8601.
+    type: string
+    example: 2015-01-01T00:00:00Z...2016-01-01T00:00:00Z
+responses:
+  200:
+    body:
+      example: |
+        [
+          {
+            "id": "7f6c381e-f57b-404c-aef4-cfa76633e68a",
+            "externalId": "066A660B498D8EF305A1B9DC7151D43E",
+            "parentId": "f4cb3010-16a4-486e-a154-19df25500873",
+            "title": "Title of the card",
+            "description": "Description of the card",
+            "landscapeImage": null,
+            "portraitImage": null,
+            "wideImage": null,
+            "startDate": "2015-08-03T09:42:14.000Z",
+            "endDate": "2015-08-04T11:47:25.000Z",
+            "publishedAt": "2015-08-03T09:42:14.000Z",
+            "expiresAt": "2015-08-08T11:47:25.000Z",
+            "author": null,
+            "publisher": {
+              "id": "b2f5ff44-eec1-4ac8-ac95-39f07ce44f3d",
+              "name": "Publishing Organization",
+              "bio": "Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo.",
+              "phone": "+31 20 1234567",
+              "email": "info@example.com",
+              "images": {
+                "card": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/blank.png",
+                "detail": "https://s3-eu-west-1.amazonaws.com/nl.tippiq.all.assets/liander_elec-small.png"
+              },
+              "hideLocation": false,
+              "location": {
+                "id": "b1f4025c-5609-11e5-858a-07060ee6e8ab",
+                "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                    4.9164,
+                    52.33788
+                  ]
+                },
+                "name": "Spaklerweg 20, Amsterdam"
+              }
+            },
+            "documentType": null,
+            "document": null,
+            "tags": [{
+              "id": "<tag-id>"
+              "label": "Tagname"
+            }],
+            "images": {
+              "portrait": "https://example.com/portrait.png",
+              "thumbnail": "https://example.com/thumbnail.png"
+            },
+            "service": {
+              "id": "00000000-0000-0000-0000-000000000000",
+              "name": "",
+              "category": "Wegwerkzaamheden",
+              "url": "http://www..nl",
+              "shortDescription": "service",
+              "description": "service description",
+              "images": {
+                "logo": "http://www..nl/images/logo.png"
+              }
+            }
+          }
+        ]
+  404: !include ../../status-codes/404.raml
+  500: !include ../../status-codes/500.raml

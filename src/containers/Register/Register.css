@@ -1,0 +1,256 @@
+@import "../../theme/variables/screen.css";
+@import "../../theme/variables/colors.css";
+
+.registerPage {
+  composes: mainPageWrapper from '../../theme/variables/screen.css';
+}
+
+.registerImageWrapper {
+  display: none;
+  @media (--screen-sm-maxwidth) {
+    display: flex;
+    flex: 1;
+    flex-align: center;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+}
+
+.imageWrapper {
+  height: 194px;
+  width: 194px;
+}
+
+.subscribe {
+  display: flex;
+  margin-top: 10px;
+}
+
+.subscribeText {
+  margin-left: 10px;
+}
+
+.wrapper {
+  composes: mainContentWrapper from '../../theme/variables/screen.css';
+  @media (--screen-sm-maxwidth) {
+    background-color: var(--whiteColor);
+    border-top: #dddddd;
+    padding-top: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.infoIcon {
+  margin-left: 10px;
+}
+
+.row {
+  @media (--screen-sm-maxwidth) {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.first {
+  width: 45%;
+  margin-right: 30px;
+  @media (--screen-sm-maxwidth) {
+    margin-right: 0;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.second {
+  width: 50%;
+  @media (--screen-sm-maxwidth) {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.heading,
+.subHeading {
+  margin: 0;
+}
+
+.baseColor {
+  color: var(--primary);
+}
+
+.wrapper {
+  composes: mainContentWrapper from '../../theme/variables/screen.css';
+  @media (--screen-sm-maxwidth) {
+    background-color: var(--whiteColor);
+    border-top: #dddddd;
+    padding-top: 10px;
+  }
+
+  @media (--screen-md-maxwidth) {
+    padding-bottom: 5px;
+  }
+}
+
+.mainContent {
+  margin-top: 32px;
+  border-top: #dddddd;
+  @media (--screen-sm-maxwidth) {
+    margin: 0;
+    padding: 0 20px 20px 20px;
+  }
+}
+
+.contentWrapper { 
+  background-color: #e4e4e4;
+  padding: 30px 20px;
+
+  @media (--screen-sm-maxwidth) {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.top {
+  margin-top: 30px;
+  @media (--screen-sm-maxwidth) {
+    margin-top: 0;
+  }
+}
+
+.bottom {
+  margin-top: 10px;
+  @media (--screen-sm-maxwidth) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.registerBlock {
+  display: flex;
+  @media (--screen-md-maxwidth) {
+    align-items: flex-end;
+  }
+}
+
+.buttonWrapper {
+  @media (--screen-sm-maxwidth) {
+    padding-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+.button {
+  margin-top: 30px;
+  @media (--screen-sm-maxwidth) {
+    margin-bottom: 20px;
+  }
+}
+
+.styleLessButton {
+  background: transparent;
+  border: 0;
+  color: var(--primary);
+  text-transform: uppercase;
+  padding-top: 0;
+  margin-top: 30px;
+
+  &:hover, 
+  &:active,
+  &:focus {
+    background-color: transparent;
+    border: 0;
+    color: var(--primary);
+  }
+}
+
+.image {
+  width: 100%;
+  max-width: 522px;
+}
+
+.midSection {
+  background: var(--primary);
+  width: 100%;
+  min-height: 517px;
+  @media (--screen-md-maxwidth) {
+      margin-top: 0px;
+  }
+  z-index: 1;
+  position: relative;
+
+  @media (--screen-sm-maxwidth) {
+    margin-top: 30px;
+  }
+}
+
+.split {
+  width: 50%;
+  padding: 0;
+
+  @media (--screen-sm-maxwidth) {
+    width: 100%;
+  }
+}
+
+.midSectionWrapper {
+  @media (--screen-sm-maxwidth) {
+    background-color: transparent;
+    padding: 40px 10px;
+  }
+}
+
+.midSubHeading {
+  margin-top: 40px;
+  display: flex;
+  color: var(--whiteColor);
+  @media (--screen-sm-maxwidth) {
+    margin-top: 0;
+  }
+}
+
+.midContent {
+  margin: 0;
+  color: var(--whiteColor);
+}
+
+.midfirst {
+  padding-right: 20px;
+  @media (--screen-sm-maxwidth) {
+    padding-right: 0px;
+  }
+}
+
+.midsecond {
+  padding-left: 20px;
+  @media (--screen-sm-maxwidth) {
+    padding-left: 0px;
+  }
+}
+
+.suggest {
+  margin-top: 20px;
+}
+
+.smallText {
+  font-size: 13px;
+  padding-left: 10px;
+};
+
+.popupBody {
+  padding: 30px;
+}
+
+.popupFooter {
+  background-color: #f3f3f3;
+  border-top: 0;
+  padding: 30px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
