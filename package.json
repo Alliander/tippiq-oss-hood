@@ -173,7 +173,7 @@
     "nunjucks": "3.0.0",
     "passport": "0.3.2",
     "passport-jwt": "2.1.0",
-    "pg": "6.1.0",
+    "pg": "7.12.1",
     "postcss-loader": "0.13.0",
     "postcss-modules-values": "1.2.2",
     "postcss-nesting": "2.3.1",
