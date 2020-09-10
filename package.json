@@ -154,7 +154,7 @@
     "frameguard": "3.0.0",
     "fs": "0.0.1-security",
     "geojsonhint": "1.2.1",
-    "http-proxy": "1.15.1",
+    "http-proxy": "1.18.1",
     "ismobilejs": "0.4.0",
     "jsonwebtoken": "7.1.9",
     "jwt-decode": "2.1.0",
